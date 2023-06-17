@@ -5,10 +5,7 @@ from google.cloud import bigquery
 client = bigquery.Client()
 
 # Streamlit app code
-
-
 def main():
-
     st.title("Data Filtering and Update with Streamlit and BigQuery")
 
     # Enter your BigQuery project ID and dataset ID
@@ -20,7 +17,16 @@ def main():
         # Query BigQuery table
         query = f"SELECT * FROM `{project_id}.{dataset_id}.{table_name}`"
         table = client.query(query).to_dataframe()
-        st.write(table)
+
+        # Pagination
+        page_size = st.number_input("Page Size", value=10)
+        page_number = st.number_input("Page Number", min_value=1, step=1, value=1)
+        start_index = (page_number - 1) * page_size
+        end_index = start_index + page_size
+        paginated_table = table[start_index:end_index]
+
+        # Display paginated table
+        st.write(paginated_table)
 
         # Select column to filter
         filter_col = st.selectbox("Select column to filter", table.columns)
@@ -38,7 +44,6 @@ def main():
         table_name_output = st.text_input("Table Name for Output")
         # Update data in BigQuery
         if table_name_output and st.button("Update Data in BigQuery"):
-
             # Insert filtered data into BigQuery table
             filtered_data.to_gbq(
                 f"{project_id}.{dataset_id}.{table_name_output}",
@@ -48,7 +53,5 @@ def main():
             st.write("Table loaded!")
 
 # Run the Streamlit app
-
-
 if __name__ == '__main__':
     main()

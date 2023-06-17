@@ -7,7 +7,7 @@ Just clone the repository and run build.sh
 Don't forget to set the region and service name for the Cloud Run container (build.sh)
 
 
-domingo_rosellnarvaez@cloudshell:~ (mov-prod11)$ git clone https://github.com/domirosell/streamlit-bq-datafiltering.git
+domingo_rosellnarvaez@cloudshell:~ (xxxxxx)$ git clone https://github.com/domirosell/streamlit-bq-datafiltering.git
 Cloning into 'streamlit-bq-datafiltering'...
 remote: Enumerating objects: 14, done.
 remote: Counting objects: 100% (14/14), done.

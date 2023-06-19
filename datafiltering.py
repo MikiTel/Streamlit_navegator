@@ -41,9 +41,9 @@ def main():
         # Display filtered data
         st.write(filtered_data)
 
-        table_name_output = st.text_input("Table Name for Output")
+        table_name_output = st.text_input("Table Name for Output",'table_cluster')
         # Update data in BigQuery
-        if table_name_output and st.button("Update Data in BigQuery"):
+        if st.button("Update Data in BigQuery"):
             # Insert filtered data into BigQuery table
             filtered_data.to_gbq(
                 f"{project_id}.{dataset_id}.{table_name_output}",
